@@ -1,5 +1,6 @@
 package com.example.photogallery
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,8 +9,9 @@ import com.example.photogallery.api.GalleryItem
 import com.example.photogallery.databinding.ListItemGalleryBinding
 
 class PhotoListAdapter(
-    private val galleryItems: List<GalleryItem>
-) : RecyclerView.Adapter<PhotoViewHolder>() {
+    private val galleryItems: List<GalleryItem>,
+    private val onItemClicked: (Uri) -> Unit
+) : RecyclerView.Adapter<PhotoListAdapter.PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,14 +25,16 @@ class PhotoListAdapter(
     }
 
     override fun getItemCount(): Int = galleryItems.size
-}
 
-class PhotoViewHolder(
-    private val binding: ListItemGalleryBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(galleryItem: GalleryItem) {
-        binding.itemImageView.load(galleryItem.url) {
-            placeholder(R.drawable.bill_up_close)
+    inner class PhotoViewHolder(
+        private val binding: ListItemGalleryBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(galleryItem: GalleryItem) {
+            binding.itemImageView.load(galleryItem.url) {
+                placeholder(R.drawable.bill_up_close)
+            }
+            binding.root.setOnClickListener { this@PhotoListAdapter.onItemClicked(galleryItem.photoPageUri) }
         }
     }
 }
+
