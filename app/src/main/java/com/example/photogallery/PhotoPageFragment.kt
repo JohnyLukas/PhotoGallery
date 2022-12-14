@@ -11,19 +11,15 @@ import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.photogallery.databinding.FragmentPhotoPageBinding
 
-class PhotoPageFragment : Fragment() {
+class PhotoPageFragment : Fragment(R.layout.fragment_photo_page) {
     private val args: PhotoPageFragmentArgs by navArgs()
+    private val binding: FragmentPhotoPageBinding by viewBinding()
 
     @SuppressLint("SetJavaScriptEnabled")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentPhotoPageBinding.inflate(
-            inflater, container, false
-        )
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.apply {
             progressBar.max = 100
 
@@ -53,7 +49,6 @@ class PhotoPageFragment : Fragment() {
                 }
             }
         }
-
-        return binding.root
     }
+
 }

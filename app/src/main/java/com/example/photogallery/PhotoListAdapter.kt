@@ -11,7 +11,7 @@ import com.example.photogallery.databinding.ListItemGalleryBinding
 class PhotoListAdapter(
     private val galleryItems: List<GalleryItem>,
     private val onItemClicked: (Uri) -> Unit
-) : RecyclerView.Adapter<PhotoViewHolder>() {
+) : RecyclerView.Adapter<PhotoListAdapter.PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,19 +21,20 @@ class PhotoListAdapter(
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val item = galleryItems[position]
-        holder.bind(item, onItemClicked)
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int = galleryItems.size
-}
 
-class PhotoViewHolder(
-    private val binding: ListItemGalleryBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(galleryItem: GalleryItem, onItemClicked: (Uri) -> Unit) {
-        binding.itemImageView.load(galleryItem.url) {
-            placeholder(R.drawable.bill_up_close)
+    inner class PhotoViewHolder(
+        private val binding: ListItemGalleryBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(galleryItem: GalleryItem) {
+            binding.itemImageView.load(galleryItem.url) {
+                placeholder(R.drawable.bill_up_close)
+            }
+            binding.root.setOnClickListener { this@PhotoListAdapter.onItemClicked(galleryItem.photoPageUri) }
         }
-        binding.root.setOnClickListener { onItemClicked(galleryItem.photoPageUri) }
     }
 }
+
