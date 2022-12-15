@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.example.photogallery.repository.PreferencesRepository
 import dagger.hilt.android.HiltAndroidApp
 
 const val NOTIFICATION_CHANNEL_ID = "flickr_poll"

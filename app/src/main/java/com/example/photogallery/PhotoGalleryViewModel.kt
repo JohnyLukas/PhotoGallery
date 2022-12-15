@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.photogallery.api.FlickrApi
 import com.example.photogallery.api.GalleryItem
+import com.example.photogallery.repository.PhotoRepository
+import com.example.photogallery.repository.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -14,9 +16,8 @@ private const val TAG = "PhotoGalleryViewModel"
 
 @HiltViewModel
 class PhotoGalleryViewModel @Inject constructor(
-    private val flickrApi: FlickrApi
+    private val photoRepository: PhotoRepository
     ) : ViewModel() {
-    private val photoRepository = PhotoRepository(flickrApi)
     private val preferencesRepository = PreferencesRepository.get()
 
     private val _uiState: MutableStateFlow<PhotoGalleryUiState> =

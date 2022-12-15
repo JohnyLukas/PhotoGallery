@@ -8,7 +8,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.photogallery.api.FlickrApi
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.photogallery.repository.PhotoRepository
+import com.example.photogallery.repository.PreferencesRepository
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
@@ -17,11 +18,10 @@ private const val TAG = "PollWorker"
 class PollWorker @Inject constructor(
     private val context: Context,
     workerParameters: WorkerParameters,
-    private val flickrApi: FlickrApi
+    private val photoRepository: PhotoRepository
 ) : CoroutineWorker(context, workerParameters) {
     override suspend fun doWork(): Result {
         val preferencesRepository = PreferencesRepository.get()
-        val photoRepository = PhotoRepository(flickrApi)
 
         val query = preferencesRepository.storedQuery.first()
         val lastId = preferencesRepository.lastResultId.first()

@@ -1,4 +1,4 @@
-package com.example.photogallery
+package com.example.photogallery.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
