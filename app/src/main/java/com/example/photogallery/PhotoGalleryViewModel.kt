@@ -3,7 +3,6 @@ package com.example.photogallery
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.photogallery.api.FlickrApi
 import com.example.photogallery.api.GalleryItem
 import com.example.photogallery.repository.PhotoRepository
 import com.example.photogallery.repository.PreferencesRepository

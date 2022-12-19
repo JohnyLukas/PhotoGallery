@@ -1,5 +1,6 @@
 package com.example.photogallery.di
 
+import com.example.photogallery.BuildConfig
 import com.example.photogallery.api.FlickrApi
 import com.example.photogallery.api.PhotoInterceptor
 import dagger.Module
@@ -14,8 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    private const val BASE_URL = "https://api.flickr.com/"
-
     private val okHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(PhotoInterceptor())
@@ -25,7 +24,7 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): FlickrApi =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()

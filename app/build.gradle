@@ -10,14 +10,18 @@ android {
     namespace 'com.example.photogallery'
     compileSdk 33
 
+    def BASE_URL = "BASE_URL"
+    def API_KEY = "API_KEY"
+
     defaultConfig {
         applicationId "com.example.photogallery"
         minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", BASE_URL, "\"https://api.flickr.com/\""
+        buildConfigField "String", API_KEY, "\"272fdca18b9dc2a797cf44b928e94d64\""
     }
 
     buildTypes {
