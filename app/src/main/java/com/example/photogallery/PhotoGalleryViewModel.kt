@@ -15,10 +15,9 @@ private const val TAG = "PhotoGalleryViewModel"
 
 @HiltViewModel
 class PhotoGalleryViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val preferencesRepository: PreferencesRepository,
     ) : ViewModel() {
-    private val preferencesRepository = PreferencesRepository.get()
-
     private val _uiState: MutableStateFlow<PhotoGalleryUiState> =
         MutableStateFlow(PhotoGalleryUiState())
 
