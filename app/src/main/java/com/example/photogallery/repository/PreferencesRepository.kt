@@ -1,14 +1,13 @@
 package com.example.photogallery.repository
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
-import androidx.datastore.preferences.preferencesDataStoreFile
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class PreferencesRepository private constructor(
+class PreferencesRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 
@@ -42,27 +41,10 @@ class PreferencesRepository private constructor(
         }
     }
 
-    companion object {
+    companion object RepositoryModule {
         private val SEARCH_QUERY_KEY = stringPreferencesKey("search_query")
         private val PREF_LAST_RESULT_ID = stringPreferencesKey("lastResultId")
         private val PREF_IS_POLLING = booleanPreferencesKey("isPolling")
-        private var INSTANCE: PreferencesRepository? = null
-
-        fun initialize(context: Context) {
-            if (INSTANCE == null) {
-                val dataStore = PreferenceDataStoreFactory.create {
-                    context.preferencesDataStoreFile("settings")
-                }
-
-                INSTANCE = PreferencesRepository(dataStore)
-            }
-        }
-
-        fun get(): PreferencesRepository {
-            return INSTANCE ?: throw IllegalStateException(
-                "PreferencesRepository must be initialized"
-            )
-        }
     }
 
 }

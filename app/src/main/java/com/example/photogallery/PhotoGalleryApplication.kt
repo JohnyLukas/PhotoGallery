@@ -14,7 +14,6 @@ const val NOTIFICATION_CHANNEL_ID = "flickr_poll"
 class PhotoGalleryApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        PreferencesRepository.initialize(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.notification_channel_name)
