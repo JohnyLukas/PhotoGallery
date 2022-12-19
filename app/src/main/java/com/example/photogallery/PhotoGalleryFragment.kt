@@ -19,11 +19,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.work.*
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 private const val POLL_WORK = "POLL_WORK"
 
+@AndroidEntryPoint
 class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
     private var searchView: SearchView? = null
     private var pollingMenuItem: MenuItem? = null

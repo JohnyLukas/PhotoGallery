@@ -3,11 +3,15 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
     id 'androidx.navigation.safeargs'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
     namespace 'com.example.photogallery'
     compileSdk 33
+
+    def BASE_URL = "BASE_URL"
+    def API_KEY = "API_KEY"
 
     defaultConfig {
         applicationId "com.example.photogallery"
@@ -15,8 +19,9 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", BASE_URL, "\"https://api.flickr.com/\""
+        buildConfigField "String", API_KEY, "\"272fdca18b9dc2a797cf44b928e94d64\""
     }
 
     buildTypes {
@@ -35,6 +40,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
@@ -52,6 +60,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
     implementation 'com.squareup.moshi:moshi:1.13.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'io.coil-kt:coil:2.0.0-rc02'
     implementation 'androidx.paging:paging-runtime:3.1.1'
@@ -59,8 +68,8 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation 'com.google.dagger:hilt-android:2.44.2'
+    kapt 'com.google.dagger:hilt-compiler:2.44.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

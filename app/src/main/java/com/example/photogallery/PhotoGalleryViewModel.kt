@@ -4,13 +4,19 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.photogallery.api.GalleryItem
+import com.example.photogallery.repository.PhotoRepository
+import com.example.photogallery.repository.PreferencesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "PhotoGalleryViewModel"
 
-class PhotoGalleryViewModel : ViewModel() {
-    private val photoRepository = PhotoRepository()
+@HiltViewModel
+class PhotoGalleryViewModel @Inject constructor(
+    private val photoRepository: PhotoRepository
+    ) : ViewModel() {
     private val preferencesRepository = PreferencesRepository.get()
 
     private val _uiState: MutableStateFlow<PhotoGalleryUiState> =
