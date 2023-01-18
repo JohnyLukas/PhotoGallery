@@ -31,7 +31,7 @@ class PhotoListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(galleryItem: GalleryItem) {
             binding.itemImageView.load(galleryItem.url) {
-                placeholder(R.drawable.bill_up_close)
+                placeholder(R.drawable.place_holder)
             }
             binding.root.setOnClickListener { this@PhotoListAdapter.onItemClicked(galleryItem.photoPageUri) }
         }

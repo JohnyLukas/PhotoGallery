@@ -1,14 +1,11 @@
 package com.example.photogallery.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.example.photogallery.BuildConfig
 import com.example.photogallery.api.FlickrApi
 import com.example.photogallery.api.PhotoInterceptor
-import com.example.photogallery.repository.PreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,10 +52,4 @@ object AppModule {
         PreferenceDataStoreFactory.create {
             context.preferencesDataStoreFile("settings")
         }
-
-    /*@Provides
-    @Singleton
-    fun providePreferencesRepository(dataStore: DataStore<Preferences>) =
-        PreferencesRepository(dataStore)*/
-
 }
